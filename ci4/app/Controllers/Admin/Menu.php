@@ -69,9 +69,8 @@ class Menu extends BaseController
 	public function find($id = null)
 	{
 		$model_menu = new Menu_M();
-		$menu = $model_menu->find($id);
-
 		$model_kategori = new Kategori_M();
+		$menu = $model_menu->find($id);
 		$kategori = $model_kategori->findAll();
 
 		$data = [
@@ -84,28 +83,55 @@ class Menu extends BaseController
 
 	public function update()
 	{
-		$id = $this->request->getPost('id');
+		$id = $this->request->getPost('idmenu');
 		$file = $this->request->getFile('gambar');
 		$name = $file->getName();
 
 		if (empty($name)) {
-			$name = $this->request->getFile('gambar');
+			$name = $this->request->getPost('gambar');
 		} else {
 			$file->move('./upload');
 		}
-		
+
 
 		$data = [
-			'idkategori' => $this->request->getPost('idkategori'),
-			'menu' => $this->request->getPost('menu'),
-			'gambar' => $name,
-			'harga' => $this->request->getPost('harga')
+			'idkategori'	=> $this->request->getPost('idkategori'),
+			'menu'			=> $this->request->getPost('menu'),
+			'gambar'		=> $name,
+			'harga'			=> $this->request->getPost('harga')
 		];
 
 		$model = new Menu_M();
 		$model->update($id, $data);
 		return redirect()->to(base_url('/admin/menu'));
+	}
 
+	public function insert()
+	{
+		$request = \Config\Services::request();
+		$file = $request->getFile('gambar');
+		$name = $file->getName();
+
+		$data = [
+			'idkategori'	=> $request->getPost('idkategori'),
+			'idmenu'		=> $request->getPost('idmenu'),
+			'gambar'		=> $name,
+			'harga'			=> $request->getPost('harga')
+		];
+
+		$model = new Menu_M();
+		$model->insert($data);
+		$file->move('./upload');
+		return redirect()->to(base_url("/admin/menu"));
+
+
+		// if ($model->insert($_POST)) {
+		// 	return redirect()->to(base_url("/admin/kategori"));
+		// } else {
+		// 	$error = $model->errors();
+		// 	session()->setFlashdata('info', $error['kategori']);
+		// 	return redirect()->to(base_url("/admin/kategori/create"));
+		// }
 	}
 
 	public function option()

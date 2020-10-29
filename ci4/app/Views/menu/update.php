@@ -4,7 +4,12 @@
 <?php
 if (!empty(session()->getFlashdata('info'))) {
 	echo '<div class="col"><div class="alert alert-danger" role="alert">';
-	echo session()->getFlashdata('info');
+	$error = session()->getFlashdata('info');
+
+	foreach ($error as $key => $value) {
+		echo $key." : ".$value;
+		echo "</br>";
+	}
 	echo '</div></div>';
 }
 ?>
@@ -29,11 +34,11 @@ if (!empty(session()->getFlashdata('info'))) {
 		</div>
 		<div class="form-group">
 			<label for="harga">Harga</label>
-			<input type="number" name="harga" value="<?= $menu['harga'] ?>" required class="form-control">
+			<input type="text" name="harga" value="<?= $menu['harga'] ?>" required class="form-control">
 		</div>
 		<div class="form-group">
 			<label for="harga">Gambar</label>
-			<input type="file" name="gambar" required class="form-control-file">
+			<input type="file" name="gambar" class="form-control-file">
 		</div>
 		<input type="hidden" name="gambar" value="<?= $menu['gambar'] ?>" required class="form-control-file">
 		<input type="hidden" name="idmenu" value="<?= $menu['idmenu'] ?>" required class="form-control-file">

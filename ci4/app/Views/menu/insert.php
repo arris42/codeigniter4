@@ -4,7 +4,12 @@
 <?php
 if (!empty(session()->getFlashdata('info'))) {
 	echo '<div class="col"><div class="alert alert-danger" role="alert">';
-	echo session()->getFlashdata('info');
+	$error = session()->getFlashdata('info');
+
+	foreach ($error as $key => $value) {
+		echo $key." : ".$value;
+		echo "</br>";
+	}
 	echo '</div></div>';
 }
 ?>
@@ -15,9 +20,8 @@ if (!empty(session()->getFlashdata('info'))) {
 <div class="col-8">
 	<form action="<?= base_url('/admin/menu/insert') ?>" method="post" enctype="multipart/form-data" autocomplete="off">
 		<div class="form-group">
-			<label for="#">Kategori</label>
-			<select class="form-control" onchange="this.form.submit()" name="idkategori" id="idkategori">
-				<option value="1">Cari...</option>
+			<label for="idkategori">Kategori</label>
+			<select class="form-control" name="idkategori" id="idkategori">
 				<?php foreach ($kategori as $key => $value) : ?>
 					<option value="<?= $value['idkategori'] ?>"><?= $value['kategori'] ?></option>
 				<?php endforeach; ?>
@@ -29,10 +33,10 @@ if (!empty(session()->getFlashdata('info'))) {
 		</div>
 		<div class="form-group">
 			<label for="harga">Harga</label>
-			<input type="number" name="harga" required class="form-control">
+			<input type="text" name="harga" required class="form-control">
 		</div>
 		<div class="form-group">
-			<label for="harga">Gambar</label>
+			<label for="gambar">Gambar</label>
 			<input type="file" name="gambar" required class="form-control-file">
 		</div>
 		<div class="form-group">
