@@ -13,7 +13,7 @@ class Menu_M extends Model
 	protected $validationRules = [
 		'menu'	=> 'alpha_numeric_space|min_length[3]|is_unique[tblmenu.menu]',
 		'harga'	=> 'numeric'
-		// you can use 'required' but it has used by html. Can be hacked? no, it has 'min_length[3]'
+		// you can use 'required' but it has been used by html. Can be hacked? Not! it has 'min_length[3]'
 	];
 
 	protected $validationMessages = [

@@ -34,7 +34,7 @@ class Menu extends BaseController
 			$jumlah = $model->where('idkategori', $id)->findAll();
 			$count = count($jumlah);
 
-			$tampil = 3;
+			$tampil = 4;
 			$mulai = 0;
 
 			if (isset($_GET['page'])) {
@@ -102,8 +102,16 @@ class Menu extends BaseController
 		];
 
 		$model = new Menu_M();
-		$model->update($id, $data);
-		return redirect()->to(base_url('/admin/menu'));
+		
+
+		if ($model->update($id, $data)) {
+			return redirect()->to(base_url('/admin/menu'));
+		} else {
+			$error = $model->errors();
+			session()->setFlashdata('info', $error);
+			return redirect()->to(base_url("/admin/menu/find/$id"));
+		}
+		
 	}
 
 	public function insert()
@@ -120,9 +128,15 @@ class Menu extends BaseController
 		];
 
 		$model = new Menu_M();
-		$model->insert($data);
-		$file->move('./upload');
-		return redirect()->to(base_url("/admin/menu"));
+
+		if ($model->insert($data)) {
+			$file->move('./upload');
+			return redirect()->to(base_url("/admin/menu"));
+		} else {
+			$error = $model->errors();
+			session()->setFlashdata('info', $error);
+			return redirect()->to(base_url("/admin/menu/create"));
+		}
 
 
 		// if ($model->insert($_POST)) {
