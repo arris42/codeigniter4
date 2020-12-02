@@ -12,55 +12,53 @@ if (isset($_GET['page_page'])) {
 ?>
 
 
-<div class="row">
-	<div class="col">
-		<h2>Data Pelanggan</h2>
+<div class="d-flex px-3 pt-1 align-items-center">
+	<div class="flex-grow-1">
+		<h4>Data Pelanggan</h4>
 	</div>
 </div>
 
-<div class="row mt-2">
+<div class="d-flex mt-3 flex-column">
 
-	<div class="col">
-		<table class="table">
+	<table class="table">
+		<tr>
+			<th>No.</th>
+			<th>Pelanggan</th>
+			<th>Alamat</th>
+			<th>Telepon</th>
+			<th>Email</th>
+			<th>Aksi</th>
+			<th>Status</th>
+		</tr>
+
+		<?php foreach ($pelanggan as $key => $value) : ?>
 			<tr>
-				<th>No.</th>
-				<th>Pelanggan</th>
-				<th>Alamat</th>
-				<th>Telepon</th>
-				<th>Email</th>
-				<th>Aksi</th>
-				<th>Status</th>
+				<td><?= $no++; ?></td>
+				<td><?= $value['pelanggan'] ?></td>
+				<td><?= $value['alamat'] ?></td>
+				<td><?= $value['notelepon'] ?></td>
+				<td><?= $value['email'] ?></td>
+				<td>
+					<a href="<?= base_url() . "/admin/pelanggan/delete/" . $value['idpelanggan'] ?>">
+						<img src="<?= base_url('/icon/trash.svg') ?>" alt="">
+					</a>
+				</td>
+				<?php 
+					if ($value['aktif']==1) {
+						$aktif="Aktif";
+					} else {
+						$aktif="Nonaktif";
+					}
+				?>
+				<td>
+					<a href="<?= base_url() . "/admin/pelanggan/update/" . $value['idpelanggan'] ."/". $value['aktif'] ?>"><?= $aktif; ?></a>
+				</td>
 			</tr>
+		<?php endforeach; ?>
 
-			<?php foreach ($pelanggan as $key => $value) : ?>
-				<tr>
-					<td><?= $no++; ?></td>
-					<td><?= $value['pelanggan'] ?></td>
-					<td><?= $value['alamat'] ?></td>
-					<td><?= $value['notelepon'] ?></td>
-					<td><?= $value['email'] ?></td>
-					<td>
-						<a href="<?= base_url() . "/admin/pelanggan/delete/" . $value['idpelanggan'] ?>">
-							<img src="<?= base_url('/icon/trash.svg') ?>" alt="">
-						</a>
-					</td>
-					<?php 
-						if ($value['aktif']==1) {
-							$aktif="Aktif";
-						} else {
-							$aktif="Nonaktif";
-						}
-					?>
-					<td>
-						<a href="<?= base_url() . "/admin/pelanggan/update/" . $value['idpelanggan'] ."/". $value['aktif'] ?>"><?= $aktif; ?></a>
-					</td>
-				</tr>
-			<?php endforeach; ?>
+	</table>
 
-		</table>
-
-		<?= $pager->links('page', 'bootstrap'); ?>
-	</div>
+	<?= $pager->links('page', 'bootstrap'); ?>
 
 </div>
 

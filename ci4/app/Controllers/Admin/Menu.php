@@ -13,12 +13,10 @@ class Menu extends BaseController
 		$paging = \Config\Services::pager();
 		$model = new Menu_M();
 
-		$limit = 4;
 		$data = [
-			'limit' => $limit,
-			'judul'	=> 'Data Menu',
-			'menu'	=> $model->paginate($limit, 'page'),
-			'pager'		=> $model->pager
+			'judul' => 'Data Menu',
+			'menu' => $model->paginate(3, 'page'),
+			'pager' => $model->pager
 		];
 
 		return view("menu/select", $data);
@@ -34,7 +32,7 @@ class Menu extends BaseController
 			$jumlah = $model->where('idkategori', $id)->findAll();
 			$count = count($jumlah);
 
-			$tampil = 4;
+			$tampil = 3;
 			$mulai = 0;
 
 			if (isset($_GET['page'])) {
@@ -63,7 +61,7 @@ class Menu extends BaseController
 		$data = [
 			'kategori'	=> $kategori
 		];
-		return view("menu/update", $data);
+		return view("menu/insert", $data);
 	}
 
 	public function find($id = null)
@@ -102,7 +100,7 @@ class Menu extends BaseController
 		];
 
 		$model = new Menu_M();
-		
+
 
 		if ($model->update($id, $data)) {
 			return redirect()->to(base_url('/admin/menu'));
@@ -111,7 +109,6 @@ class Menu extends BaseController
 			session()->setFlashdata('info', $error);
 			return redirect()->to(base_url("/admin/menu/find/$id"));
 		}
-		
 	}
 
 	public function insert()
@@ -122,7 +119,7 @@ class Menu extends BaseController
 
 		$data = [
 			'idkategori'	=> $request->getPost('idkategori'),
-			'idmenu'		=> $request->getPost('idmenu'),
+			'menu'		=> $request->getPost('menu'),
 			'gambar'		=> $name,
 			'harga'			=> $request->getPost('harga')
 		];
@@ -137,15 +134,6 @@ class Menu extends BaseController
 			session()->setFlashdata('info', $error);
 			return redirect()->to(base_url("/admin/menu/create"));
 		}
-
-
-		// if ($model->insert($_POST)) {
-		// 	return redirect()->to(base_url("/admin/kategori"));
-		// } else {
-		// 	$error = $model->errors();
-		// 	session()->setFlashdata('info', $error['kategori']);
-		// 	return redirect()->to(base_url("/admin/kategori/create"));
-		// }
 	}
 
 	public function option()

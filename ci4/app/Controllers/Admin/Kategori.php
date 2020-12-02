@@ -7,17 +7,10 @@ use App\Models\Kategori_M;
 
 class Kategori extends BaseController
 {
-	public function index()
-	{
-		// echo "<h1>Belajar CI-4</h1>";
-		// return view('welcome_message');
-	}
-
 	public function read()
 	{
 		$paging = \Config\Services::pager();
 		$model = new Kategori_M();
-		// $kategori = $model->findAll();
 
 		$limit = 4;
 		$data = [

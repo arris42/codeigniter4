@@ -4,7 +4,7 @@
 <?php
 if (isset($_GET['page_page'])) {
 	$page = $_GET['page_page'];
-	$jumlah = $limit;
+	$jumlah = 3;
 	$no = ($jumlah * $page) - $jumlah + 1;
 } else {
 	$no = 1;
@@ -12,27 +12,18 @@ if (isset($_GET['page_page'])) {
 ?>
 
 
-<div class="row">
-	<div class="col-4">
-		<a class="btn btn-primary" href="<?= base_url('/admin/menu/create') ?>" role="button">Tambah Data</a>
+<div class="d-flex px-3 align-items-center">
+	<div class="flex-grow-1">
+		<h4>Menu</h4>
 	</div>
-	<div class="col">
-		<h2><?= $judul; ?></h2>
-	</div>
+	<form action="<?= base_url('/admin/menu/read') ?>" method="get" class="mr-4">
+		<?= view_cell('\App\Controllers\Admin\Menu::option') ?>
+	</form>
+		<a class="btn btn-primary" href="<?= base_url('/admin/menu/create') ?>" role="button"><i class="fa fa-plus"></i></a>
 </div>
 
-<div class="row mt-2">
-	<div class="col-6">
-		<form action="<?= base_url('/admin/menu/read') ?>" method="get">
-			<?= view_cell('\App\Controllers\Admin\Menu::option') ?>
+<div class="d-flex mt-3 flex-column">
 
-		</form>
-	</div>
-</div>
-
-<div class="row mt-2">
-
-	<div class="col">
 		<table class="table">
 			<tr>
 				<th>No.</th>
@@ -62,7 +53,6 @@ if (isset($_GET['page_page'])) {
 		</table>
 
 		<?= $pager->links('page', 'bootstrap'); ?>
-	</div>
 
 </div>
 

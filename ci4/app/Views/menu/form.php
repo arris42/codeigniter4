@@ -13,7 +13,7 @@
 
 	<form action="<?= base_url('/admin/menu/insert') ?>" method="post" enctype="multipart/form-data">
 		Gambar : <input type="file" name="gambar" required><br>
-		<input type="submit" name="simpan" value="Save!">
+		<input type="submit" name="simpan" value="Submit" class="btn btn-primary">
 	</form>
 
 </div>

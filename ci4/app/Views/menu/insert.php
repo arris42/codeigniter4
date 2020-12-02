@@ -1,49 +1,52 @@
 <?= $this->extend('template/admin'); ?>
 <?= $this->section('content1'); ?>
 
+
+<h4>Insert Data</h4>
+<hr class="hr-item">
+
 <?php
 if (!empty(session()->getFlashdata('info'))) {
-	echo '<div class="col"><div class="alert alert-danger" role="alert">';
+	echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">';
 	$error = session()->getFlashdata('info');
 
 	foreach ($error as $key => $value) {
 		echo $key." : ".$value;
 		echo "</br>";
 	}
-	echo '</div></div>';
+	echo '<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		</button>';
+	echo '</div>';
 }
 ?>
 
 
-<h2 class="col">Insert Data</h2>
-
-<div class="col-8">
-	<form action="<?= base_url('/admin/menu/insert') ?>" method="post" enctype="multipart/form-data" autocomplete="off">
-		<div class="form-group">
-			<label for="idkategori">Kategori</label>
-			<select class="form-control" name="idkategori" id="idkategori">
-				<?php foreach ($kategori as $key => $value) : ?>
-					<option value="<?= $value['idkategori'] ?>"><?= $value['kategori'] ?></option>
-				<?php endforeach; ?>
-			</select>
-		</div>
-		<div class="form-group">
-			<label for="menu">Menu</label>
-			<input type="text" name="menu" required class="form-control">
-		</div>
-		<div class="form-group">
-			<label for="harga">Harga</label>
-			<input type="text" name="harga" required class="form-control">
-		</div>
-		<div class="form-group">
-			<label for="gambar">Gambar</label>
-			<input type="file" name="gambar" required class="form-control-file">
-		</div>
-		<div class="form-group">
-			<input type="submit" name="simpan" value="Save!" class="btn btn-primary">
-		</div>
-	</form>
-</div>
+<form action="<?= base_url('/admin/menu/insert') ?>" method="post" enctype="multipart/form-data" autocomplete="off">
+	<div class="form-group">
+		<label for="idkategori">Kategori</label>
+		<select class="form-control" name="idkategori" id="idkategori">
+			<?php foreach ($kategori as $key => $value) : ?>
+				<option value="<?= $value['idkategori'] ?>"><?= $value['kategori'] ?></option>
+			<?php endforeach; ?>
+		</select>
+	</div>
+	<div class="form-group">
+		<label for="menu">Menu</label>
+		<input type="text" name="menu" required class="form-control">
+	</div>
+	<div class="form-group">
+		<label for="harga">Harga</label>
+		<input type="text" name="harga" required class="form-control">
+	</div>
+	<div class="form-group">
+		<label for="gambar">Gambar</label>
+		<input type="file" name="gambar" required class="form-control">
+	</div>
+	<div class="form-group">
+		<input type="submit" name="simpan" value="Submit" class="btn btn-primary">
+	</div>
+</form>
 
 
 <?= $this->endSection(); ?>

@@ -12,46 +12,42 @@ if (isset($_GET['page_page'])) {
 ?>
 
 
-<div class="row">
-	<div class="col-4">
-		<a class="btn btn-primary" href="<?= base_url('/admin/kategori/create') ?>" role="button">Tambah Data</a>
+<div class="d-flex px-3 align-items-center">
+	<div class="flex-grow-1">
+		<h4>Kategori</h4>
 	</div>
-	<div class="col">
-		<h2>Data Kategori</h2>
-	</div>
+	<a class="btn btn-primary" href="<?= base_url('/admin/kategori/create') ?>" role="button"><i class="fa fa-plus"></i></a>
 </div>
 
-<div class="row mt-2">
+<div class="d-flex mt-3 flex-column">
 
-	<div class="col">
-		<table class="table">
+	<table class="table">
+		<tr>
+			<th>No.</th>
+			<th>Kategori</th>
+			<th>Keterangan</th>
+			<th>Aksi</th>
+		</tr>
+
+		<?php foreach ($kategori as $key => $value) : ?>
 			<tr>
-				<th>No.</th>
-				<th>Kategori</th>
-				<th>Keterangan</th>
-				<th>Aksi</th>
+				<td><?= $no++; ?></td>
+				<td><?= $value['kategori'] ?></td>
+				<td><?= $value['keterangan'] ?></td>
+				<td>
+					<a class="btn btn-danger text-white" href="<?= base_url() . "/admin/kategori/delete/" . $value['idkategori'] ?>">
+						<i class="fa fa-trash-o" style="font-size:18px;"></i>
+					</a>
+					<a class="btn btn-info text-white" href="<?= base_url() . "/admin/kategori/find/" . $value['idkategori'] ?>">
+						<i class="fa fa-pencil" style="font-size: 18px;"></i>
+					</a>
+				</td>
 			</tr>
+		<?php endforeach; ?>
 
-			<?php foreach ($kategori as $key => $value) : ?>
-				<tr>
-					<td><?= $no++; ?></td>
-					<td><?= $value['kategori'] ?></td>
-					<td><?= $value['keterangan'] ?></td>
-					<td>
-						<a href="<?= base_url() . "/admin/kategori/delete/" . $value['idkategori'] ?>">
-							<img src="<?= base_url('/icon/trash.svg') ?>" alt="">
-						</a>
-						<a href="<?= base_url() . "/admin/kategori/find/" . $value['idkategori'] ?>">
-							<img src="<?= base_url('/icon/pencil.svg') ?>" alt="">
-						</a>
-					</td>
-				</tr>
-			<?php endforeach; ?>
+	</table>
 
-		</table>
-
-		<?= $pager->links('page', 'bootstrap'); ?>
-	</div>
+	<?= $pager->links('page', 'bootstrap'); ?>
 
 </div>
 

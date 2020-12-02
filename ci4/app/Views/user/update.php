@@ -1,9 +1,9 @@
 <?= $this->extend('template/admin'); ?>
 <?= $this->section('content1'); ?>
 
-
-<h4>Insert Data</h4>
+<h4>Update Data</h4>
 <hr class="hr-item">
+
 
 <?php
 if (!empty(session()->getFlashdata('info'))) {
@@ -17,15 +17,19 @@ if (!empty(session()->getFlashdata('info'))) {
 ?>
 
 
-
-<form action="<?= base_url('/admin/kategori/insert') ?>" method="post" autocomplete="off">
+<form action="<?= base_url('/admin/user/ubah') ?>" method="post" autocomplete="off">
+	<input type="hidden" value="<?= $user['iduser'] ?>" name="iduser" required class="form-control">
 	<div class="form-group">
-		<label for="kategori">Kategori</label>
-		<input type="text" name="kategori" required class="form-control">
+		<label for="email">Email</label>
+		<input type="email" value="<?= $user['email'] ?>" name="email" required class="form-control">
 	</div>
 	<div class="form-group">
-		<label for="keterangan">Keterangan</label>
-		<textarea type="text" name="keterangan" required class="form-control"></textarea>
+		<label for="level">Level</label>
+		<select class="form-control" name="level" id="level">
+			<?php foreach ($level as $key) : ?>
+				<option <?php if ($user['level'] == $key) echo "selected"; ?> value="<?= $key ?>"><?= $key ?></option>
+			<?php endforeach; ?>
+		</select>
 	</div>
 	<div class="form-group">
 		<input type="submit" name="simpan" value="Submit" class="btn btn-primary">
