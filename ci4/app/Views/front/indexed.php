@@ -12,23 +12,25 @@
 </head>
 
 <body>
-	<nav class="navbar navbar-expand-lg navbar-light dashboard-header shadow fixed-top">
+	<nav class="navbar navbar-light dashboard-header shadow fixed-top">
 		<a class="navbar-brand py-3 header-item" href="<?= base_url() ?>">NT Aura Rest</a>
 		<button class="navbar-toggler header-button" type="button" data-toggle="collapse" data-target="#sidebarSide" aria-controls="sidebarSide" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
-		<div class="collapse navbar-collapse justify-content-end bg-white" id="idnavbarNav">
+		<!-- <div class="collapse navbar-collapse justify-content-end bg-white" id="idnavbarNav">
 			<ul class="navbar-nav w-50 justify-content-evenly">
 			</ul>
-		</div>
+		</div> -->
 	</nav>
 
 	<!-- Fix Whitespace on right side body by giving "m-0" -->
 	<!-- Whitespace space caused by "row" and "col" grid css -->
 	<div class="content m-0">
-		<div class="collapse navbar-collapse sidebar bg-5" id="sidebarSide">
+		<div class="collapse sidebar bg-5" id="sidebarSide">
 			<ul class="navbar-nav list-group list-group-flush bg-5 px-3">
 				<div class="py-3">
+					<div style="color: white;font-weight: bold;font-size: .75em;background-color: transparent;border: 0;" class="list-group-item pl-3 pb-0">KATEGORI</div>
+					<hr class="bg-white">
 					<?php foreach ($kategori as $key) : ?>
 						<a class="list-group-item sidebar-item pl-3" href="<?php base_url('/' . strtolower($key)) ?>"><?= $key ?></a>
 					<?php endforeach ?>
@@ -52,7 +54,7 @@
 
 	<!-- CSS DEBUGGING -->
 
-	<div class="position-relative d-inline-block">
+	<!-- <div class="position-relative d-inline-block">
 		<div class="d-inline position-fixed" style="bottom: 0;">
 			<button class="btn btn-danger" id="ghostcss" onclick="ghostCSS()">Debug CSS</button>
 			<button class="btn btn-info" id="ghostcss" onclick="refresh()">Refresh</button>
@@ -66,7 +68,7 @@
 		function refresh() {
 			location.reload();
 		}
-	</script>
+	</script> -->
 
 </body>
 

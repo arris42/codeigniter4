@@ -12,6 +12,8 @@ if (isset($_GET['one'])) {
 ?>
 
 
+<h4>Menu list</h4>
+<hr class="hr-item">
 <div class="row mb-4">
 	<?php foreach ($menu as $key => $value) : ?>
 		<div class="col-sm-6 col-md-4 col-lg-3 p-0">
